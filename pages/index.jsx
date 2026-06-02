@@ -15,12 +15,12 @@ function HoneyBadge({ amount }) {
 
 function Avatar({ url, emoji = '🌸', size = 54, accent = '#ff6fa8', light = '#fff0f7', dark = '#ffb7d5' }) {
   if (url) return (
-    <div style={{width:size,height:size,borderRadius:'50%',overflow:'hidden',border:`2.5px solid ${accent}`,flexShrink:0,boxShadow:`0 2px 10px ${accent}44`}}>
+    <div style={{width:size,height:size,borderRadius:'50%',overflow:'hidden',border:'2.5px solid ' + accent,flexShrink:0,boxShadow:'0 2px 10px ' + accent + '44'}}>
       <img src={url} alt="" style={{width:'100%',height:'100%',objectFit:'cover'}}/>
     </div>
   )
   return (
-    <div style={{width:size,height:size,borderRadius:'50%',background:`linear-gradient(135deg,${light},${dark})`,display:'flex',alignItems:'center',justifyContent:'center',fontSize:size*0.45,border:`2.5px solid ${accent}`,flexShrink:0,boxShadow:`0 2px 10px ${accent}44`}}>
+    <div style={{width:size,height:size,borderRadius:'50%',background:'linear-gradient(135deg,' + light + ',' + dark + ')',display:'flex',alignItems:'center',justifyContent:'center',fontSize:size*0.45,border:'2.5px solid ' + accent,flexShrink:0,boxShadow:'0 2px 10px ' + accent + '44'}}>
       {emoji}
     </div>
   )
@@ -33,7 +33,7 @@ function Stars() {
   })))
   return (
     <div style={{position:'fixed',inset:0,pointerEvents:'none',overflow:'hidden',zIndex:0}}>
-      {pts.map(p=><div key={p.id} style={{position:'absolute',width:4,height:4,borderRadius:'50%',background:'rgba(255,182,219,0.4)',top:p.top,left:p.left,animation:`twinkle ${p.dur} ease-in-out infinite`,animationDelay:p.delay}}/>)}
+      {pts.map(p=><div key={p.id} style={{position:'absolute',width:4,height:4,borderRadius:'50%',background:'rgba(255,182,219,0.4)',top:p.top,left:p.left,animation:'twinkle ' + p.dur + ' ease-in-out infinite',animationDelay:p.delay}}/>)}
     </div>
   )
 }
@@ -186,9 +186,9 @@ function HomeScreen({ user, onSelectChar, onShop, onCreateChar, onProfile }) {
               const t=charTheme(char)
               return (
                 <div key={char.id} onClick={()=>onSelectChar(char)}
-                  style={{background:`linear-gradient(135deg,${t.light},${t.dark}44)`,border:`2px solid ${t.dark}`,borderRadius:20,padding:'14px 12px',cursor:'pointer',animation:`fadeUp 0.3s ease ${i*0.05}s both`,transition:'transform 0.2s,box-shadow 0.2s',boxShadow:`0 4px 14px ${t.dark}55`,position:'relative',overflow:'hidden'}}
-                  onMouseEnter={e=>{e.currentTarget.style.transform='translateY(-4px) scale(1.02)';e.currentTarget.style.boxShadow=`0 12px 26px ${t.dark}77`}}
-                  onMouseLeave={e=>{e.currentTarget.style.transform='';e.currentTarget.style.boxShadow=`0 4px 14px ${t.dark}55`}}
+                  style={{background:'linear-gradient(135deg,' + t.light + ',' + t.dark + '44)',border:'2px solid ' + t.dark,borderRadius:20,padding:'14px 12px',cursor:'pointer',animation:'fadeUp 0.3s ease ' + (i*0.05) + 's both',transition:'transform 0.2s,box-shadow 0.2s',boxShadow:'0 4px 14px ' + t.dark + '55',position:'relative',overflow:'hidden'}}
+                  onMouseEnter={e=>{e.currentTarget.style.transform='translateY(-4px) scale(1.02)';e.currentTarget.style.boxShadow='0 12px 26px ' + t.dark + '77'}}
+                  onMouseLeave={e=>{e.currentTarget.style.transform='';e.currentTarget.style.boxShadow='0 4px 14px ' + t.dark + '55'}}
                 >
                   <div style={{display:'flex',justifyContent:'center',marginBottom:8}}>
                     <Avatar url={char.avatar_url} emoji='🌸' size={60} accent={t.accent} light={t.light} dark={t.dark}/>
@@ -197,7 +197,7 @@ function HomeScreen({ user, onSelectChar, onShop, onCreateChar, onProfile }) {
                   {char.tagline&&<div style={{fontSize:11,color:t.accent,textAlign:'center',opacity:0.75,marginBottom:5,lineHeight:1.3}}>{char.tagline}</div>}
                   {char.tags?.length>0&&(
                     <div style={{display:'flex',flexWrap:'wrap',gap:3,justifyContent:'center',marginBottom:4}}>
-                      {char.tags.slice(0,3).map(tag=><span key={tag} style={{background:`${t.accent}22`,color:t.accent,borderRadius:10,fontSize:9,padding:'2px 7px'}>#{tag}</span>)}
+                      {char.tags.slice(0,3).map(tag=><span key={tag} style={{background:t.accent + '22',color:t.accent,borderRadius:10,fontSize:9,padding:'2px 7px'}>#{tag}</span>)}
                     </div>
                   )}
                   {char.chat_count>0&&<div style={{fontSize:10,color:'#bbb',textAlign:'center'}}>💬 {char.chat_count}</div>}
@@ -218,9 +218,9 @@ function HomeScreen({ user, onSelectChar, onShop, onCreateChar, onProfile }) {
 function CharDetailScreen({ char, onBack, onStartChat }) {
   const t = charTheme(char)
   return (
-    <div style={{minHeight:'100vh',background:`linear-gradient(160deg,${t.light},#ffffff)`,fontFamily:"'Noto Sans Thai',sans-serif"}}>
+    <div style={{minHeight:'100vh',background:'linear-gradient(160deg,' + t.light + ',#ffffff)',fontFamily:"'Noto Sans Thai',sans-serif"}}>
       {/* Hero */}
-      <div style={{background:`linear-gradient(160deg,${t.light},${t.dark}55)`,padding:'0 0 24px',position:'relative'}}>
+      <div style={{background:'linear-gradient(160deg,' + t.light + ',' + t.dark + '55)',padding:'0 0 24px',position:'relative'}}>
         <button onClick={onBack} style={{position:'absolute',top:14,left:14,background:'rgba(255,255,255,0.8)',border:'none',borderRadius:'50%',width:36,height:36,cursor:'pointer',fontSize:18,display:'flex',alignItems:'center',justifyContent:'center',zIndex:2}}>←</button>
         <div style={{display:'flex',justifyContent:'center',paddingTop:50,marginBottom:14}}>
           <Avatar url={char.avatar_url} size={110} accent={t.accent} light={t.light} dark={t.dark}/>
@@ -229,9 +229,9 @@ function CharDetailScreen({ char, onBack, onStartChat }) {
           <div style={{fontFamily:"'Fredoka One',cursive",fontSize:26,color:t.accent}}>{char.name}</div>
           {char.tagline&&<div style={{fontSize:13,color:t.accent,opacity:0.8,marginTop:4,fontStyle:'italic'}}>"{char.tagline}"</div>}
           <div style={{display:'flex',gap:4,justifyContent:'center',flexWrap:'wrap',marginTop:10}}>
-            {char.gender&&<span style={{background:`${t.accent}22`,color:t.accent,borderRadius:12,fontSize:11,padding:'3px 10px'}}>{char.gender==='male'?'♂ ชาย':char.gender==='female'?'♀ หญิง':'⚧ อื่นๆ'}</span>}
+            {char.gender&&<span style={{background:t.accent + '22',color:t.accent,borderRadius:12,fontSize:11,padding:'3px 10px'}}>{char.gender==='male'?'♂ ชาย':char.gender==='female'?'♀ หญิง':'⚧ อื่นๆ'}</span>}
             {char.age_rating==='adult'&&<span style={{background:'#ff446622',color:'#ff4466',borderRadius:12,fontSize:11,padding:'3px 10px'}}>🔞 ผู้ใหญ่เท่านั้น</span>}
-            {char.tags?.map(tag=><span key={tag} style={{background:`${t.accent}15`,color:t.accent,borderRadius:12,fontSize:11,padding:'3px 10px'}}>#{tag}</span>)}
+            {char.tags?.map(tag=><span key={tag} style={{background: t.accent + '15',color:t.accent,borderRadius:12,fontSize:11,padding:'3px 10px'}}>#{tag}</span>)}
           </div>
         </div>
       </div>
@@ -239,7 +239,7 @@ function CharDetailScreen({ char, onBack, onStartChat }) {
       <div style={{padding:'20px 16px'}}>
         {/* Description */}
         {char.description&&(
-          <div style={{background:'white',borderRadius:18,padding:18,marginBottom:14,boxShadow:'0 2px 12px rgba(0,0,0,0.06)',border:`1.5px solid ${t.dark}`}}>
+          <div style={{background:'white',borderRadius:18,padding:18,marginBottom:14,boxShadow:'0 2px 12px rgba(0,0,0,0.06)',border:'1.5px solid ' + t.dark}}>
             <div style={{fontFamily:"'Fredoka One',cursive",fontSize:14,color:t.accent,marginBottom:8}}>📖 เกี่ยวกับตัวละคร</div>
             <div style={{fontSize:14,color:'#555',lineHeight:1.7,whiteSpace:'pre-wrap'}}>{char.description}</div>
           </div>
@@ -247,7 +247,7 @@ function CharDetailScreen({ char, onBack, onStartChat }) {
 
         {/* Personality */}
         {char.personality&&(
-          <div style={{background:'white',borderRadius:18,padding:18,marginBottom:14,boxShadow:'0 2px 12px rgba(0,0,0,0.06)',border:`1.5px solid ${t.dark}`}}>
+          <div style={{background:'white',borderRadius:18,padding:18,marginBottom:14,boxShadow:'0 2px 12px rgba(0,0,0,0.06)',border:'1.5px solid ' + t.dark}}>
             <div style={{fontFamily:"'Fredoka One',cursive",fontSize:14,color:t.accent,marginBottom:8}}>✨ บุคลิกภาพ</div>
             <div style={{fontSize:13,color:'#666',lineHeight:1.7,whiteSpace:'pre-wrap'}}>{char.personality}</div>
           </div>
@@ -255,7 +255,7 @@ function CharDetailScreen({ char, onBack, onStartChat }) {
 
         {/* Scenario */}
         {char.scenario&&(
-          <div style={{background:'white',borderRadius:18,padding:18,marginBottom:14,boxShadow:'0 2px 12px rgba(0,0,0,0.06)',border:`1.5px solid ${t.dark}`}}>
+          <div style={{background:'white',borderRadius:18,padding:18,marginBottom:14,boxShadow:'0 2px 12px rgba(0,0,0,0.06)',border:'1.5px solid ' + t.dark}}>
             <div style={{fontFamily:"'Fredoka One',cursive",fontSize:14,color:t.accent,marginBottom:8}}>🎬 ฉากเปิดเรื่อง</div>
             <div style={{fontSize:13,color:'#666',lineHeight:1.7,whiteSpace:'pre-wrap'}}>{char.scenario}</div>
           </div>
@@ -263,7 +263,7 @@ function CharDetailScreen({ char, onBack, onStartChat }) {
 
         {/* Creator notes */}
         {char.creator_notes&&(
-          <div style={{background:`${t.light}`,borderRadius:18,padding:18,marginBottom:14,border:`1.5px dashed ${t.dark}`}}>
+          <div style={{background:t.light,borderRadius:18,padding:18,marginBottom:14,border:'1.5px dashed ' + t.dark}}>
             <div style={{fontSize:12,color:t.accent,marginBottom:6}}>📝 บันทึกจากผู้สร้าง</div>
             <div style={{fontSize:13,color:'#777',lineHeight:1.6,whiteSpace:'pre-wrap'}}>{char.creator_notes}</div>
           </div>
@@ -271,18 +271,18 @@ function CharDetailScreen({ char, onBack, onStartChat }) {
 
         {/* Stats */}
         <div style={{display:'flex',gap:10,marginBottom:20}}>
-          <div style={{flex:1,background:'white',borderRadius:14,padding:14,textAlign:'center',border:`1.5px solid ${t.dark}`}}>
+          <div style={{flex:1,background:'white',borderRadius:14,padding:14,textAlign:'center',border:'1.5px solid ' + t.dark}}>
             <div style={{fontSize:20,fontWeight:800,color:t.accent}}>{char.chat_count||0}</div>
             <div style={{fontSize:11,color:'#bbb'}}>แชท</div>
           </div>
-          <div style={{flex:1,background:'white',borderRadius:14,padding:14,textAlign:'center',border:`1.5px solid ${t.dark}`}}>
+          <div style={{flex:1,background:'white',borderRadius:14,padding:14,textAlign:'center',border:'1.5px solid ' + t.dark}}>
             <div style={{fontSize:14,fontWeight:600,color:t.accent}}>{char.originality==='original'?'ต้นฉบับ':char.originality==='fanfic'?'แฟนฟิค':'กึ่งต้นฉบับ'}</div>
             <div style={{fontSize:11,color:'#bbb'}}>ประเภท</div>
           </div>
         </div>
 
         {/* Start chat button */}
-        <button onClick={()=>onStartChat(char)} style={{width:'100%',padding:16,borderRadius:18,border:'none',background:`linear-gradient(135deg,${t.accent},${t.dark})`,color:'#fff',fontFamily:"'Fredoka One',cursive",fontSize:20,cursor:'pointer',boxShadow:`0 5px 20px ${t.accent}55`,letterSpacing:'0.03em'}}>
+        <button onClick={()=>onStartChat(char)} style={{width:'100%',padding:16,borderRadius:18,border:'none',background:'linear-gradient(135deg,' + t.accent + ',' + t.dark + ')',color:'#fff',fontFamily:"'Fredoka One',cursive",fontSize:20,cursor:'pointer',boxShadow:'0 5px 20px ' + t.accent + '55',letterSpacing:'0.03em'}}>
           เริ่มแชท ✦
         </button>
       </div>
@@ -586,8 +586,8 @@ function ChatScreen({ char, user, onBack, onUpdateHoney }) {
   }
 
   return (
-    <div style={{display:'flex',flexDirection:'column',height:'100vh',background:`linear-gradient(160deg,${t.light},#ffffff)`}}>
-      <div style={{background:'rgba(255,255,255,0.93)',backdropFilter:'blur(14px)',padding:'11px 14px',display:'flex',alignItems:'center',gap:11,borderBottom:`2px solid ${t.dark}`,flexShrink:0}}>
+    <div style={{display:'flex',flexDirection:'column',height:'100vh',background:'linear-gradient(160deg,' + t.light + ',#ffffff)'}}>
+      <div style={{background:'rgba(255,255,255,0.93)',backdropFilter:'blur(14px)',padding:'11px 14px',display:'flex',alignItems:'center',gap:11,borderBottom:'2px solid ' + t.dark,flexShrink:0}}>
         <button onClick={onBack} style={{background:'none',border:'none',cursor:'pointer',fontSize:22,color:t.accent,lineHeight:1}}>←</button>
         <Avatar url={char.avatar_url} size={42} accent={t.accent} light={t.light} dark={t.dark}/>
         <div style={{flex:1,minWidth:0}}>
@@ -601,13 +601,13 @@ function ChatScreen({ char, user, onBack, onUpdateHoney }) {
       </div>
 
       <div style={{flex:1,overflowY:'auto',padding:'16px 12px'}}>
-        {char.status_display&&<div style={{background:`${t.light}`,border:`1.5px solid ${t.dark}`,borderRadius:12,padding:'8px 14px',marginBottom:14,fontSize:12,color:t.accent,textAlign:'center',fontStyle:'italic'}}>{char.status_display}</div>}
+        {char.status_display&&<div style={{background:t.light,border:'1.5px solid ' + t.dark,borderRadius:12,padding:'8px 14px',marginBottom:14,fontSize:12,color:t.accent,textAlign:'center',fontStyle:'italic'}}>{char.status_display}</div>}
         {msgs.map((msg,i)=>{
           const isUser=msg.role==='user'
           return (
             <div key={i} style={{display:'flex',justifyContent:isUser?'flex-end':'flex-start',marginBottom:13,animation:'fadeUp 0.25s ease'}}>
               {!isUser&&<div style={{marginRight:8,flexShrink:0,alignSelf:'flex-end'}}><Avatar url={char.avatar_url} size={32} accent={t.accent} light={t.light} dark={t.dark}/></div>}
-              <div style={{maxWidth:'76%',background:isUser?`linear-gradient(135deg,${t.accent},${t.accent}cc)`:'rgba(255,255,255,0.95)',color:isUser?'#fff':'#444',borderRadius:isUser?'18px 4px 18px 18px':'4px 18px 18px 18px',padding:'10px 15px',fontSize:14.5,lineHeight:1.65,fontFamily:"'Noto Sans Thai',sans-serif",boxShadow:isUser?`0 4px 14px ${t.accent}44`:'0 2px 10px rgba(0,0,0,0.07)',border:isUser?'none':`1.5px solid ${t.dark}`,whiteSpace:'pre-wrap',wordBreak:'break-word'}}>
+              <div style={{maxWidth:'76%',background:isUser?'linear-gradient(135deg,' + t.accent + ',' + t.accent + 'cc)':'rgba(255,255,255,0.95)',color:isUser?'#fff':'#444',borderRadius:isUser?'18px 4px 18px 18px':'4px 18px 18px 18px',padding:'10px 15px',fontSize:14.5,lineHeight:1.65,fontFamily:"'Noto Sans Thai',sans-serif",boxShadow:isUser?'0 4px 14px ' + t.accent + '44':'0 2px 10px rgba(0,0,0,0.07)',border:isUser?'none':'1.5px solid ' + t.dark,whiteSpace:'pre-wrap',wordBreak:'break-word'}}>
                 {msg.content}
               </div>
             </div>
@@ -616,8 +616,8 @@ function ChatScreen({ char, user, onBack, onUpdateHoney }) {
         {loading&&(
           <div style={{display:'flex',alignItems:'flex-end',marginBottom:13}}>
             <div style={{marginRight:8,flexShrink:0}}><Avatar url={char.avatar_url} size={32} accent={t.accent} light={t.light} dark={t.dark}/></div>
-            <div style={{background:'rgba(255,255,255,0.95)',borderRadius:'4px 18px 18px 18px',padding:'13px 16px',border:`1.5px solid ${t.dark}`,display:'flex',gap:5}}>
-              {[0,1,2].map(i=><div key={i} style={{width:7,height:7,borderRadius:'50%',background:t.accent,animation:'bounce 1.2s infinite',animationDelay:`${i*0.18}s`}}/>)}
+            <div style={{background:'rgba(255,255,255,0.95)',borderRadius:'4px 18px 18px 18px',padding:'13px 16px',border:'1.5px solid ' + t.dark,display:'flex',gap:5}}>
+              {[0,1,2].map(i=><div key={i} style={{width:7,height:7,borderRadius:'50%',background:t.accent,animation:'bounce 1.2s infinite',animationDelay: (i*0.18) + 's'}}/>)}
             </div>
           </div>
         )}
@@ -625,8 +625,8 @@ function ChatScreen({ char, user, onBack, onUpdateHoney }) {
         <div ref={bottomRef}/>
       </div>
 
-      <div style={{background:'rgba(255,255,255,0.93)',backdropFilter:'blur(14px)',borderTop:`2px solid ${t.dark}`,padding:'10px 12px',display:'flex',gap:9,alignItems:'flex-end',flexShrink:0}}>
-        <div style={{flex:1,background:'#fff',border:`1.5px solid ${t.dark}`,borderRadius:20,padding:'10px 14px'}}>
+      <div style={{background:'rgba(255,255,255,0.93)',backdropFilter:'blur(14px)',borderTop:'2px solid ' + t.dark,padding:'10px 12px',display:'flex',gap:9,alignItems:'flex-end',flexShrink:0}}>
+        <div style={{flex:1,background:'#fff',border:'1.5px solid ' + t.dark,borderRadius:20,padding:'10px 14px'}}>
           <textarea ref={textRef} value={input} onChange={e=>setInput(e.target.value)}
             onKeyDown={e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();send()}}}
             placeholder={`พิมพ์ข้อความถึง ${char.name}...`} rows={1}
@@ -635,7 +635,7 @@ function ChatScreen({ char, user, onBack, onUpdateHoney }) {
           />
         </div>
         <button onClick={send} disabled={loading||!input.trim()||honey<MSG_COST}
-          style={{width:46,height:46,borderRadius:'50%',border:'none',flexShrink:0,background:loading||!input.trim()||honey<MSG_COST?'#eee':`linear-gradient(135deg,${t.accent},${t.dark})`,color:loading||!input.trim()||honey<MSG_COST?'#bbb':'#fff',fontSize:20,cursor:loading||!input.trim()||honey<MSG_COST?'not-allowed':'pointer',display:'flex',alignItems:'center',justifyContent:'center',transition:'all 0.2s',boxShadow:loading||!input.trim()||honey<MSG_COST?'none':`0 4px 14px ${t.accent}55`}}>
+          style={{width:46,height:46,borderRadius:'50%',border:'none',flexShrink:0,background:loading||!input.trim()||honey<MSG_COST?'#eee':'linear-gradient(135deg,' + t.accent + ',' + t.dark + ')',color:loading||!input.trim()||honey<MSG_COST?'#bbb':'#fff',fontSize:20,cursor:loading||!input.trim()||honey<MSG_COST?'not-allowed':'pointer',display:'flex',alignItems:'center',justifyContent:'center',transition:'all 0.2s',boxShadow:loading||!input.trim()||honey<MSG_COST?'none':'0 4px 14px ' + t.accent + '55'}}>
           {loading?'⏳':'💌'}
         </button>
       </div>
@@ -678,7 +678,7 @@ function ShopScreen({ user, onBack, onUpdateHoney }) {
         <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:12}}>
           {PACKAGES.map((pkg,i)=>(
             <div key={pkg.id} onClick={()=>buy(pkg)}
-              style={{background:'rgba(255,255,255,0.94)',border:'2px solid #ffd6a5',borderRadius:20,padding:'20px 12px',cursor:'pointer',textAlign:'center',animation:`fadeUp 0.3s ease ${i*0.08}s both`,transition:'transform 0.2s',boxShadow:'0 4px 16px #ffd6a544',position:'relative'}}
+              style={{background:'rgba(255,255,255,0.94)',border:'2px solid #ffd6a5',borderRadius:20,padding:'20px 12px',cursor:'pointer',textAlign:'center',animation:'fadeUp 0.3s ease ' + (i*0.08) + 's both',transition:'transform 0.2s',boxShadow:'0 4px 16px #ffd6a544',position:'relative'}}
               onMouseEnter={e=>e.currentTarget.style.transform='translateY(-4px) scale(1.02)'}
               onMouseLeave={e=>e.currentTarget.style.transform=''}
             >
